@@ -1,0 +1,110 @@
+<div class="container">
+
+    <div class="form-group">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <h1>FMC Familie weekend 2015 Registratie</h1>
+            <h2>Controleer uw gegevens:</h2>
+
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Type:</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">{{fmcGwModel.type}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Voornaam:</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">{{fmcGwModel.firstName}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Achternaam:</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">{{fmcGwModel.familyName}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Telefoonnummer:</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">{{fmcGwModel.telephone}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Email:</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">{{fmcGwModel.email}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Geboortedatum:</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">{{fmcGwModel.birthDate}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Satelliet gemeente:</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">{{fmcGwModel.satellite}}</p>
+                    </div>
+                </div>
+
+                <div ng-if="fmcGwModel.type != 'individual'">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Aantal personen:</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static">{{fmcGwModel.amountPersons}}</p>
+                        </div>
+                    </div>
+{{fmcGwModel}}
+
+                    <div class="form-group" ng-repeat="person in fmcGwModel.persons">
+                        <label class="col-sm-4 control-label" for="amountPersons">Persoon {{person.id}} gegevens:</label>
+                        <div class="col-sm-4">
+                            <div class="col-sm-4">
+                                <p class="form-control-static">{{fmcGwModel.personsDetails[person.id].firstName}}</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="form-control-static">{{fmcGwModel.personsDetails[person.id].birthDate}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Totaal bedrag:</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">{{fmcGwModel.totalAmount}}</p>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-primary" ng-click="back()">Terug</a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-primary" ng-click="submitPost()">Registreren</a>
+        </div>
+    </div>
+
+
+</div>
