@@ -65,13 +65,13 @@
             if ($scope.fmcGwModel.personsDetails.length === 0) {
 
                 for(var i = 1, length = amount; length >= i; i++ ) {
-                    $scope.fmcGwModel.personsDetails.push({id: i, firstName: '', birthdate: ''});
+                    $scope.fmcGwModel.personsDetails.push({id: i, firstName: '', birthDate: ''});
                 }
             } else if (amount > $scope.fmcGwModel.personsDetails.length) {
                 var subtraction = amount - $scope.fmcGwModel.personsDetails.length;
 
                 for(var ii = 1, initLength = $scope.fmcGwModel.personsDetails.length; subtraction >= ii; ii++) {
-                    $scope.fmcGwModel.personsDetails.push({id: initLength + ii, firstName: '', birthdate: ''});
+                    $scope.fmcGwModel.personsDetails.push({id: initLength + ii, firstName: '', birthDate: ''});
                 }
             } else if (amount < $scope.fmcGwModel.personsDetails.length) {
                 $scope.fmcGwModel.personsDetails.length = amount;
