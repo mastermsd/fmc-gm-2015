@@ -11,11 +11,9 @@
         $scope.fmcGwModel = fmcGwModel;
         $scope.validateForm = validateForm;
         $scope.submitPost = submitPost;
-        $scope.countAmount = countAmount;
+        $scope.countAmountPersons = countAmountPersons;
         $scope.resetForm = resetForm;
         $scope.back = back;
-        $scope.fmcGwModel.personsDetails = [];
-
         $scope.removeData = removeData;
 
         $scope.$watch('fmcGwModel.type', function(value) {
@@ -35,7 +33,6 @@
 
         function submitPost () {
             dataRef.push($scope.fmcGwModel);
-
             resetForm();
         }
 
@@ -44,14 +41,6 @@
         }
 
         function resetForm () {
-/*            fmcGwModel.type = '';
-            fmcGwModel.firstName = '';
-            fmcGwModel.familyName = '';
-            fmcGwModel.email = '';
-            fmcGwModel.telephone = '';
-            fmcGwModel.satellite = '';
-            fmcGwModel.amountPersons = '';
-            fmcGwModel.personDetails = '';*/
             $scope.fmcGwModel = {};
             $scope.fmcGwModel.personsDetails.length = 0;
         }
@@ -60,19 +49,19 @@
             $state.go('form');
         }
 
-        function countAmount (amount) {
+        function countAmountPersons (amount) {
 
-            if ($scope.fmcGwModel.personsDetails.length === 0) {
+            if (typeof $scope.fmcGwModel.personsDetails === 'undefined') {
+                $scope.fmcGwModel.personsDetails = [];
+            }
 
-                for(var i = 1, length = amount; length >= i; i++ ) {
-                    $scope.fmcGwModel.personsDetails.push({id: i, firstName: '', birthDate: ''});
-                }
-            } else if (amount > $scope.fmcGwModel.personsDetails.length) {
+            if (amount > $scope.fmcGwModel.personsDetails.length) {
                 var subtraction = amount - $scope.fmcGwModel.personsDetails.length;
 
-                for(var ii = 1, initLength = $scope.fmcGwModel.personsDetails.length; subtraction >= ii; ii++) {
-                    $scope.fmcGwModel.personsDetails.push({id: initLength + ii, firstName: '', birthDate: ''});
+                for(var i = 1, initLength = $scope.fmcGwModel.personsDetails.length; subtraction >= i; i++) {
+                    $scope.fmcGwModel.personsDetails.push({id: initLength + i, firstName: '', birthDate: ''});
                 }
+
             } else if (amount < $scope.fmcGwModel.personsDetails.length) {
                 $scope.fmcGwModel.personsDetails.length = amount;
             }
