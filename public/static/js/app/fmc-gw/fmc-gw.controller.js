@@ -20,7 +20,9 @@
 
             if (value === 'individual') {
                 delete $scope.fmcGwModel.amountPersons;
-                $scope.fmcGwModel.personsDetails.length = 0;
+                if (typeof $scope.fmcGwModel.personsDetails !== 'undefined') {
+                    $scope.fmcGwModel.personsDetails.length = 0;
+                }
             } else if (value === 'family') {
                 delete $scope.fmcGwModel.firstName;
                 delete $scope.fmcGwModel.birthDate;

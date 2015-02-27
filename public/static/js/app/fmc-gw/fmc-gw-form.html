@@ -61,8 +61,7 @@
 
         </div>
 
-       <!-- <div ng-show="fmcGwModel.type"> -->
-        <div>
+        <div ng-show="fmcGwModel.type">
             <div class="form-group" ng-if="fmcGwModel.type == 'individual'">
         <!--     <div class="form-group"> -->
                 <label class="col-sm-2 control-label" for="firstName">Voornaam:</label>
@@ -103,6 +102,7 @@
                 <label class="col-sm-2 control-label" for="familyName">Satelliet gemeente:</label>
                 <div class="col-sm-10">
                     <select class="form-control" name="satellite" ng-model="fmcGwModel.satellite">
+                        <option value="">--</option>
                         <option value="Delft">Delft</option>
                         <option value="Den Haag">Den Haag</option>
                         <option value="Amersfoort">Amersfoort</option>
@@ -117,6 +117,7 @@
                     <label class="col-sm-2 control-label" for="amountPersons">Aantal personen:</label>
                     <div class="col-sm-10">
                         <select class="form-control" name="amountPersons" ng-model="fmcGwModel.amountPersons" ng-change="countAmountPersons(fmcGwModel.amountPersons)">
+                            <option value="">--</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
