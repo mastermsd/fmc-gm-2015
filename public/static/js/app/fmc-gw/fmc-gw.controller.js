@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('fmcGw')
-    .controller('fmcGwController', ['$scope', '$state', 'fmcGwModel', '$firebase', fmcGwController
+    .controller('fmcGwController', ['$scope', '$state', 'fmcGwModel', 'fmcGwConstant', '$firebase', fmcGwController
     ]);
 
-    function fmcGwController ($scope, $state, fmcGwModel, $firebase) {
+    function fmcGwController ($scope, $state, fmcGwModel, fmcGwConstant, $firebase) {
         var dataRef = new Firebase("https://fmc-gw2015.firebaseio.com/");
 
         $scope.fmcGwModel = fmcGwModel;
@@ -13,7 +13,7 @@
         $scope.submitPost = submitPost;
         $scope.countAmountPersons = countAmountPersons;
         $scope.resetForm = resetForm;
-        $scope.back = back;
+        $scope.backToForm = backToForm;
         $scope.removeData = removeData;
 
         $scope.$watch('fmcGwModel.type', function(value) {
@@ -28,6 +28,48 @@
                 delete $scope.fmcGwModel.birthDate;
             }
          });
+
+        $scope.$watch('fmcGwModel.individualBirthdate', function (date) {
+            fmcGwModel.individualAge = calculateAge(date);
+            isEarlyBird();
+        });
+
+        function calculateAge (date) {
+            var birthday = new Date(date);
+            return Math.floor((Date.now() - birthday) / (31557600000));
+        }
+
+        function calculatePrice (age) {
+            if (age > 12) {
+
+            } else if (age > 5) {
+
+            } else if (age < 5) {
+
+            }
+        }
+
+        function isEarlyBird () {
+
+            var isEarlyBird = false;
+            var earlyBirdDate = new Date(fmcGwConstant.earlyBirdDate);
+            earlyBirdDate.setHours(0,0,0,0);
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var todayDate = new Date(yyyy + '-' + mm + '-' + dd);
+
+            var timeDiff = earlyBirdDate.getTime() - todayDate.getTime();
+
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            if (diffDays >= 0) {
+                isEarlyBird = true;
+            }   
+
+            return isEarlyBird;
+        }
 
         function validateForm () {
             $state.go('validate');
@@ -47,7 +89,7 @@
             $scope.fmcGwModel.personsDetails.length = 0;
         }
 
-        function back () {
+        function backToForm () {
             $state.go('form');
         }
 
