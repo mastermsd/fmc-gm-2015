@@ -15,6 +15,8 @@
         $scope.resetForm = resetForm;
         $scope.backToForm = backToForm;
         $scope.removeData = removeData;
+        $scope.registerDate = registerDate();
+        $scope.fmcGwModel.registerDate = registerDate().toDateString();
 
         $scope.$watch('fmcGwModel.type', function(value) {
 
@@ -31,44 +33,60 @@
 
         $scope.$watch('fmcGwModel.individualBirthdate', function (date) {
             fmcGwModel.individualAge = calculateAge(date);
-            isEarlyBird();
+            fmcGwModel.totalAmount = calculatePrice(fmcGwModel.individualAge);
+
         });
 
         function calculateAge (date) {
             var birthday = new Date(date);
-            return Math.floor((Date.now() - birthday) / (31557600000));
+            return Math.floor((registerDate() - birthday) / (31557600000));
         }
 
         function calculatePrice (age) {
             if (age > 12) {
-
-            } else if (age > 5) {
-
-            } else if (age < 5) {
-
+                if (isEarlyBird()) {
+                    return fmcGwConstant.prices.early.adult;
+                } else {
+                    return fmcGwConstant.prices.normal.adult;
+                }
+            } else if (age > 3 && age < 13) {
+                if (isEarlyBird()) {
+                    return fmcGwConstant.prices.early.child;
+                } else {
+                    return fmcGwConstant.prices.normal.child;
+                }
+            } else if ( age < 4) {
+                if (isEarlyBird()) {
+                    return fmcGwConstant.prices.early.infant;
+                } else {
+                    return fmcGwConstant.prices.normal.infant;
+                }
             }
         }
 
-        function isEarlyBird () {
-
-            var isEarlyBird = false;
-            var earlyBirdDate = new Date(fmcGwConstant.earlyBirdDate);
-            earlyBirdDate.setHours(0,0,0,0);
+        function registerDate () {
             var today = new Date();
             var dd = today.getDate();
             var mm = today.getMonth() + 1;
             var yyyy = today.getFullYear();
-            var todayDate = new Date(yyyy + '-' + mm + '-' + dd);
+            return new Date(yyyy + '-' + mm + '-' + dd);
+        }
 
-            var timeDiff = earlyBirdDate.getTime() - todayDate.getTime();
+        function isEarlyBird () {
+
+            var isEarly = false;
+            var earlyBirdDate = new Date(fmcGwConstant.earlyBirdDate);
+            earlyBirdDate.setHours(0,0,0,0);
+
+            var timeDiff = earlyBirdDate.getTime() - registerDate().getTime();
 
             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
             if (diffDays >= 0) {
-                isEarlyBird = true;
-            }   
+                isEarly = true;
+            }
 
-            return isEarlyBird;
+            return isEarly;
         }
 
         function validateForm () {
@@ -77,6 +95,7 @@
 
         function submitPost () {
             dataRef.push($scope.fmcGwModel);
+            $state.go('confirmation');
             resetForm();
         }
 
@@ -85,11 +104,12 @@
         }
 
         function resetForm () {
+            fmcGwModel = {};
             $scope.fmcGwModel = {};
-            $scope.fmcGwModel.personsDetails.length = 0;
         }
 
         function backToForm () {
+            resetForm();
             $state.go('form');
         }
 

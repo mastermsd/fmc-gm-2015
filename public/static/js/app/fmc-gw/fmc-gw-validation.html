@@ -14,7 +14,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" ng-if="fmcGwModel.type == 'individual'">
                     <label class="col-sm-4 control-label">Voornaam:</label>
                     <div class="col-sm-4">
                         <p class="form-control-static">{{fmcGwModel.firstName}}</p>
@@ -25,6 +25,13 @@
                     <label class="col-sm-4 control-label">Achternaam:</label>
                     <div class="col-sm-4">
                         <p class="form-control-static">{{fmcGwModel.familyName}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-if="fmcGwModel.type == 'individual'">
+                    <label class="col-sm-4 control-label">Geslacht:</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">{{fmcGwModel.individualGender}}</p>
                     </div>
                 </div>
 
@@ -42,10 +49,10 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" ng-if="fmcGwModel.type == 'individual'">
                     <label class="col-sm-4 control-label">Geboortedatum:</label>
                     <div class="col-sm-4">
-                        <p class="form-control-static">{{fmcGwModel.birthDate}}</p>
+                        <p class="form-control-static">{{fmcGwModel.individualBirthdate}}</p>
                     </div>
                 </div>
 
@@ -80,9 +87,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Totaal bedrag:</label>
+                    <label class="col-sm-4 control-label">Te betalen bedrag:</label>
                     <div class="col-sm-4">
-                        <p class="form-control-static">{{fmcGwModel.totalAmount}}</p>
+                        <p class="form-control-static">&euro; {{fmcGwModel.totalAmount}}</p>
                     </div>
                 </div>
 

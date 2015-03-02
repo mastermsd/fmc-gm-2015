@@ -17,6 +17,9 @@
             .state('validate', {
                 templateUrl : '/static/js/app/fmc-gw/fmc-gw-validation.html',
                 controller : 'fmcGwController'
+            })
+            .state('confirmation', {
+                templateUrl : '/static/js/app/fmc-gw/fmc-gw-confirmation.html'
             });
     }
 
